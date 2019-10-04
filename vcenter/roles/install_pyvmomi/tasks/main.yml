@@ -3,13 +3,13 @@
   register: pip_status
   ignore_errors: true
 
-- name: install pip
+- name: install python-pip
   yum:
-    name: pip
+    name: python-pip
     state: latest
-  when: ({{pip_status.stdout}} == "unknown")
+  when: pip_status is failed
 
 - name: Install pyvmomi
   pip:
     name: pyvmomi
-  when: ({{pip_status.stdout}} == "active")
+  when: pip_status is succeeded
