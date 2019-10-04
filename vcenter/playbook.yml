@@ -9,6 +9,10 @@
     - name: "password"
       prompt: "Enter your password to virtualcenter"
       private: yes
-    - name: "guest"  
-      prompt: "Enter you guest VM name: "
+    - name: "urlIP"  
+      prompt: "Enter vcenter ip adress: "
       private: no
+    
+   roles:
+    - install_pyvmomi
+    #- get_hosts_stats
