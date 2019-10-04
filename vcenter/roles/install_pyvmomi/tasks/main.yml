@@ -1,5 +1,5 @@
 - name: search pip
-  shell: systemctl is-active pip
+  shell: pip --version
   register: pip_status
   ignore_errors: true
 
