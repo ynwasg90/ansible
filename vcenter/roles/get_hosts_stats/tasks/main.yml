@@ -10,8 +10,17 @@
     method: POST
     user: "{{ user }}"
     password: "{{ password }}"
-    register: login
+  register: login
 
-- name: show login
+- name: Get all hosts from vCenter using cookies from last task
+  uri:
+    url: https://{{ vcenter_server }}/rest/vcenter/host
+    force_basic_auth: yes
+    validate_certs: no
+    headers:
+      Cookie: "{{ login.set_cookie }}"
+  register: vchosts
+
+- name: show vchosts
   debug:
-    msg: "login is {{ login }}"
+    msg: "vchosts are {{ vchosts }}"
