@@ -23,4 +23,16 @@
 
 - name: show vchosts
   debug:
-    msg: "vchosts are {{ vchosts.name }}"
+    msg: "vchosts are {{ vchosts.json.value | to_nice_json }}"
+
+- name: Gather vmware host facts from vCenter
+  vmware_host_facts:
+    hostname: "{{ vcenter_server }}"
+    username: "{{ user }}"
+    password: "{{ password }}"
+    esxi_hostname: "192.168.167.33"
+  register: host_facts
+
+- name: show vchosts
+  debug:
+    msg: "vchosts are {{ host_facts | to_nice_json }}"
