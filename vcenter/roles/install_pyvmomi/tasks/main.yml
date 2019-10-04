@@ -1,3 +1,14 @@
+- name: search pip
+  command: systemctl is-active pip
+  register: pip_status
+
+- name: install pip
+  yum:
+    name: pip
+    state: latest
+  when: ({{pip_status}} == "unknown")
+
 - name: Install pyvmomi
   pip:
     name: pyvmomi
+  when: ({{pip_status}} == "active")
