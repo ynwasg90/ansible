@@ -12,15 +12,6 @@
     password: "{{ password }}"
     register: login
 
-- name: Get all hosts from vCenter using cookies from last task
-  uri:
-    url: https://{{ vcenter_server }}/rest/vcenter/host
-    force_basic_auth: yes
-    validate_certs: no
-    headers:
-      Cookie: "{{ login.set_cookie }}"
-    register: vchosts
-
-- name: show vchosts
+- name: show login
   debug:
-    msg: "vchosts are {{ vchosts }}"
+    msg: "login is {{ login }}"
