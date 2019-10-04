@@ -1,5 +1,5 @@
 - name: search pip
-  command: systemctl is-active pip
+  shell: systemctl is-active pip
   register: pip_status
 
 - name: install pip
