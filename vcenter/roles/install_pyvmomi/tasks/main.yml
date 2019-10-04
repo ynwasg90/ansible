@@ -7,9 +7,9 @@
   yum:
     name: pip
     state: latest
-  when: ({{pip_status}} == "unknown")
+  when: ({{pip_status.stdout}} == "unknown")
 
 - name: Install pyvmomi
   pip:
     name: pyvmomi
-  when: ({{pip_status}} == "active")
+  when: ({{pip_status.stdout}} == "active")
