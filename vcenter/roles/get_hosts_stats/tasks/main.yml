@@ -1,6 +1,6 @@
 - name: Vcenter user
   debug:
-    msg: "Vcenter user is {{ vcenter_user }}"
+    msg: "Vcenter user is {{ user }}"
 
 - name: Login into vCenter and get cookies
   uri:
@@ -8,6 +8,6 @@
     force_basic_auth: yes
     validate_certs: no
     method: POST
-    user: "{{ vcenter_user }}"
-    password: "{{ vcenter_pass }}"
+    user: "{{ user }}"
+    password: "{{ password }}"
     register: login
