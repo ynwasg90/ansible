@@ -1,1 +1,13 @@
-- name: create file debug
+- name: Vcenter user
+  debug:
+    msg: "Vcenter user is {{ vcenter_user }}"
+
+- name: Login into vCenter and get cookies
+  uri:
+    url: https://{{ vcenter_server }}/rest/com/vmware/cis/session
+    force_basic_auth: yes
+    validate_certs: no
+    method: POST
+    user: "{{ vcenter_user }}"
+    password: "{{ vcenter_pass }}"
+    register: login

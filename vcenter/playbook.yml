@@ -14,5 +14,5 @@
       private: no
     
    roles:
-    - install_pyvmomi
-    #- get_hosts_stats
+    #- install_pyvmomi
+    - get_hosts_stats
