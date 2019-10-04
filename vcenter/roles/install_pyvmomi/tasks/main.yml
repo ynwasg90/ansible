@@ -1,6 +1,7 @@
 - name: search pip
   shell: systemctl is-active pip
   register: pip_status
+  ignore_errors: true
 
 - name: install pip
   yum:
