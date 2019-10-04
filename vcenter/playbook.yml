@@ -1,0 +1,14 @@
+ - name: Create a VM in resource pool
+   hosts: localhost
+   connection: local
+   gather_facts: False
+   vars_prompt:
+    - name: "user"
+      prompt: "Enter your username to virtualcenter"
+      private: no
+    - name: "password"
+      prompt: "Enter your password to virtualcenter"
+      private: yes
+    - name: "guest"  
+      prompt: "Enter you guest VM name: "
+      private: no
