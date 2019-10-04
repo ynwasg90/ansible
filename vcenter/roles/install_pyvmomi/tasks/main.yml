@@ -7,9 +7,12 @@
   yum:
     name: python-pip
     state: latest
+  register: pip_install
   when: pip_status is failed
 
 - name: Install pyvmomi
   pip:
     name: pyvmomi
-  when: pip_status is succeeded
+  when: 
+    - pip_status is succeeded
+    - pip_install is succeeded
