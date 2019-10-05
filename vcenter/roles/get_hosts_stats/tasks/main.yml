@@ -27,7 +27,8 @@
   loop: "{{ vchosts.json.value }}"
 
 - pause:
-    prompt: "Set hostname"
+    prompt: "Please enter the value for kernel.shmmax "
+    echo: yes
   register: host_name
 
 - name: Gather vmware host facts from vCenter
@@ -38,6 +39,7 @@
     esxi_hostname: "{{ host_name }}"
     validate_certs: false
   register: host_facts
+  when: host_name is defined
 
 - name: show host_facts
   debug:
