@@ -29,7 +29,6 @@
 - pause:
     prompt: "Set hostname"
   register: host_name
-  echo: no
 
 - name: Gather vmware host facts from vCenter
   vmware_host_facts:
