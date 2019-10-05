@@ -26,8 +26,10 @@
     msg: " {{item.name}} {{item.power_state}}"
   loop: "{{ vchosts.json.value }}"
 
-- name: host_name
-  prompt: Enter a host name
+- pause:
+    prompt: "Do you want to install MariaDB (yes/no)?"
+  register: host_name
+  delegate_to: localhost
 
 - name: Gather vmware host facts from vCenter
   vmware_host_facts:
