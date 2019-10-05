@@ -27,9 +27,9 @@
   loop: "{{ vchosts.json.value }}"
 
 - pause:
-    prompt: "Do you want to install MariaDB (yes/no)?"
+    prompt: "Set hostname"
   register: host_name
-  delegate_to: localhost
+  echo: no
 
 - name: Gather vmware host facts from vCenter
   vmware_host_facts:
