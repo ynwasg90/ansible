@@ -23,17 +23,24 @@
 
 - name: show vchosts
   debug:
-    msg: "vchosts are {{ vchosts.json.value | to_nice_json }}"
+    msg: " {{item.name}} {{item.power_state}}"
+  loop: "{{ vchosts.json.value }}"
+
+- name: Choose vm host
+  vars_prompt:
+     - name: "host_name"
+       prompt: "Enter hostname"
 
 - name: Gather vmware host facts from vCenter
   vmware_host_facts:
     hostname: "{{ vcenter_server }}"
     username: "{{ user }}"
     password: "{{ password }}"
-    esxi_hostname: "192.168.167.33"
+    esxi_hostname: "{{ host_name }}"
     validate_certs: false
   register: host_facts
 
-- name: show vchosts
+- name: show host_facts
   debug:
-    msg: "vchosts are {{ host_facts | to_nice_json }}"
+    msg: "host_facts are {{ host_facts.ansible_datastore | to_nice_json }}"
+  when: host_facts is defined
