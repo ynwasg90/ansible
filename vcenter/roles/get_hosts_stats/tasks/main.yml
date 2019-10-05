@@ -26,10 +26,8 @@
     msg: " {{item.name}} {{item.power_state}}"
   loop: "{{ vchosts.json.value }}"
 
-- name: Choose vm host
-  vars_prompt:
-     - name: "host_name"
-       prompt: "Enter hostname"
+- name: host_name
+  prompt: Enter a host name
 
 - name: Gather vmware host facts from vCenter
   vmware_host_facts:
