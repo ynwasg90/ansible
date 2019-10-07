@@ -1,0 +1,90 @@
+ииспользовать template
+https://garthkerr.com/using-ansible-template-for-partial-file-block/
+
+разбить на группы во время выполнения скриптов
+https://docs.ansible.com/ansible/latest/modules/add_host_module.html 
+
+Справка по синтаксису yml 
+https://docs.ansible.com/ansible/latest/reference_appendices/YAMLSyntax.html#yaml-syntax
+
+Ansible pull 
+https://docs.ansible.com/ansible/latest/cli/ansible-pull.html
+
+BP 
+https://docs.ansible.com/ansible/latest/user_guide/playbooks_best_practices.html
+
+linear - подефолту, хост1 ждёт пока выполнить хост1 и только потом запускает новый task
+free - (strategy: free в yml) хосты не ждут друг друга. Хост1 запустит вторую задачу сразу после выполнения первой
+host_pinnet - как free, pool освобождается когда закончатся все tasks у одного хоста
+https://docs.ansible.com/ansible/latest/user_guide/playbooks_strategies.html
+
+ansible pull - когда клиенты сами подключаются к серверу и у себя выполняют всё (генерация, выполнение),обычно chron у клиента
+https://docs.ansible.com/ansible/2.4/ansible-pull.html
+
+ansible.cfg
+forks=5   pool, т.е если 2 а хостов 3 то применяются правила сверху   strategies  
+
+ansible-playbook
+ansible-playbook -i hosts.yml file.yml --limit 'host1, host2'
+ansible-playbook -i hosts.yml file.yml -e 'var1=value1,var2=value2'
+
+directories
+/ansible_folde/host_vars/host_name.yml  переменные для хостов
+/ansible_folde/group_vars/group_name.yml  переменные для групп
+/roles/role_name/tasks/main.yml - задачи роли
+/roles/role_name/vars/main.yml - переменные роли
+
+
+https://github.com/mouseratti/basu-ansible.git
+{{ansible_var}} 		использование переменных в ansible
+{{ansible_facts.hostname}} 		вытащить hostname
+gather_facts no 	не собирать факты
+free strategy ansible
+{{ var1 | default('test') | to_nice_json }} - если var1 пустой, то выведится текст test. (default - это фильтр, to_nice_json - форматирование)
+ansible filters   все фильтра
+{{var3 | mandatory}} должна быть задана обязательно
+when: dirname is defined  
+
+вставить переменные из файла (локальные переменные перезатираются)
+tasks:
+    - name: include_vars
+      include_vars:
+        dir: vars
+
+ansible.cfg /etc/ansible
+stdout_callback = debud  вывод с /n
+
+ignore_errors: yes
+
+создать переменные
+- name: set_fact
+      set_fact:
+        my_fact: "some value"
+		
+использование ролей
+- name: extended
+  hosts: all
+  gather_facts: no
+  connection: local
+  # become: true
+  roles:
+    - create_file
+
+/roles/create_file/tasks/main.yml
+- name: create file debug
+  # Читать значения можно через обе нотации!
+  debug:
+    msg: "{{role_path|basename}} {{dict1['key1']}} {{dict1.key1}}"
+
+дать выполнять sudo без пароля
+/etc/sudoers.d/100-ansible
+ansible ALL=NOPASSWD: ALL
+
+скачать роли с ansible-galaxy
+ansible-galaxy install nginxinc.nginx --roles-path folder_name
+
+notify
+ansible_python_interpreter
+include_task
+
+
