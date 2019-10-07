@@ -26,6 +26,9 @@
     msg: " {{item.name}} {{item.power_state}}"
   loop: "{{ vchosts.json.value }}"
 
+loop_control:
+    label: "{{ item.name }}"
+    
 - pause:
     prompt: "Please enter the value for kernel.shmmax "
     echo: yes
