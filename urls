@@ -30,6 +30,10 @@ ansible-playbook -i hosts.yml file.yml -e 'var1=value1,var2=value2'
 ansible-inventory -i inventory_file --list
 #скачать роли с ansible-galaxy
 ansible-galaxy install nginxinc.nginx --roles-path folder_name
+ansible-vault encrypt_string --stdin-name 'ansible_password'
+mysecret.sh - в корневой директории, автоматом вставит password в ansible-vault
+ansible-playbook file.yml --vault-password-file
+
 
 directories
 /ansible_folde/host_vars/host_name.yml  переменные для хостов
@@ -83,7 +87,8 @@ ignore_errors: yes
 /etc/sudoers.d/100-ansible
 ansible ALL=NOPASSWD: ALL
 
-
+ansible_user
+ansible_password
 
 notify
 ansible_python_interpreter
