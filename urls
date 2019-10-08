@@ -13,6 +13,9 @@ https://docs.ansible.com/ansible/latest/cli/ansible-pull.html
 #BP 
 https://docs.ansible.com/ansible/latest/user_guide/playbooks_best_practices.html
 
+Ускоряем Ansible с помощью Mitogen
+https://habr.com/ru/post/453520/
+
 #linear - подефолту, хост1 ждёт пока выполнить хост1 и только потом запускает новый task
 #free - (strategy: free в yml) хосты не ждут друг друга. Хост1 запустит вторую задачу сразу после выполнения первой
 #host_pinnet - как free, pool освобождается когда закончатся все tasks у одного хоста
